@@ -1,0 +1,1 @@
+SELECT new seguros.ti.gestionar.semilla.dto.ClientDto(c.id,c.rut,c.firstName,c.lastName) FROM Client c

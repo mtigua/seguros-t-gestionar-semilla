@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: semilla
+  cloud:
+    config:
+      uri: http://localhost:8080
+      profile: local

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: semilla
+  cloud:
+    config:
+      uri: ${SPRING_CLOUD_CONFIG_SERVER_PATH}
+      profile: dev

@@ -1,0 +1,1 @@
+SELECT new seguros.ti.gestionar.semilla.dto.ClientInsuranceDto (c.rut, c.firstName, c.lastName, i.name, i.rate) FROM Client c INNER JOIN c.insurances i WHERE c.id = :id AND i.rate > :rate

@@ -1,0 +1,1 @@
+SELECT new seguros.ti.gestionar.semilla.dto.ClientInsuranceDto (c.rut, c.firstName, c.lastName, i.name, i.rate) FROM Insurance i INNER JOIN i.client c WHERE i.id = :id 

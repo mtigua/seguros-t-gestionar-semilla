@@ -1,0 +1,71 @@
+<configuration>
+  <springProperty scope="context" name="KAFKA_SSL_TRUSTSTORE_PATH" source="kafka.KAFKA_SSL_TRUSTSTORE_PATH"/>
+  <springProperty scope="context" name="BOOTSTRAP_SERVERS_KAFKA" source="kafka.BOOTSTRAP_SERVERS_KAFKA"/>
+  <springProperty scope="context" name="LOGBACK_KAFKA_TOPIC_SEMILLA" source="kafka.LOGBACK_KAFKA_TOPIC_SEMILLA"/>
+  <springProperty scope="context" name="KAFKA_SSL_TRUSTSTORE_PALABRAPASE" source="kafka.KAFKA_SSL_TRUSTSTORE_PALABRAPASE"/>
+
+   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+        <jsonFormatter
+            class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+            <prettyPrint>true</prettyPrint>
+        </jsonFormatter>
+        <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+    </layout>
+	</appender>
+ 
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'} [%thread] %-5level %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+ 
+    
+     <appender name="fast-kafka-appender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+      <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc/>
+                <timestamp>
+                    <timeZone>GMT</timeZone>
+                </timestamp>
+                <arguments/>
+                <tags/>
+                <stackTrace/>
+                <pattern>
+                    <pattern>
+                        {
+                        "app_producer": "semilla",
+                        "alias":"semilla",
+                        "level": "%level",
+                        "class": "%logger{40}",
+                        "log_date":"%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z',UTC}",
+                        "log_message": "%message",
+                         "method":"%M"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+      </encoder>
+        <topic>${LOGBACK_KAFKA_TOPIC_SEMILLA}</topic>
+        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />
+        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />
+        <producerConfig>bootstrap.servers=${BOOTSTRAP_SERVERS_KAFKA}</producerConfig>
+        <producerConfig>acks=1</producerConfig>
+        <producerConfig>linger.ms=1000</producerConfig>
+        <producerConfig>batch.size=15360</producerConfig>
+ 		<producerConfig>client.id="semilla"</producerConfig>
+ 		
+ 		<producerConfig>security.protocol=SSL</producerConfig>
+        <producerConfig>ssl.truststore.password=${KAFKA_SSL_TRUSTSTORE_PALABRAPASE}</producerConfig>
+        <producerConfig>ssl.truststore.location=${KAFKA_SSL_TRUSTSTORE_PATH}</producerConfig>
+		<producerConfig>ssl.keystore.type=JKS</producerConfig>
+		<producerConfig>ssl.enabled.protocols=TLSv1.2,TLSv1.1,TLSv1</producerConfig>
+    </appender> 
+ 
+    <root level="info">
+         <appender-ref ref="fast-kafka-appender"/> 
+         <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

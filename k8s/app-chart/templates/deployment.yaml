@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app-chart.fullname" . }}
+  labels:
+    {{- include "app-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "app-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "app-chart.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.repository }}
+          env:
+          - name: SPRING_CLOUD_CONFIG_SERVER_PATH
+            valueFrom:
+               secretKeyRef:
+                  name: seguros-ti-gestionar-semilla-secrets
+                  key: springCloudConfigServerPath
+          - name: SWAGGER_BASEPATH
+            valueFrom:
+               secretKeyRef:
+                  name: seguros-ti-gestionar-semilla-secrets
+                  key: swaggerBasePath                                    
+          envFrom:
+          - configMapRef:
+               name: {{ .Values.configmap.name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.httpProbe.path }}
+              scheme: HTTP
+              port: {{ .Values.httpProbe.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 25
+            successThreshold: 1
+            timeoutSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.httpProbe.path }}
+              scheme: HTTP
+              port: {{ .Values.httpProbe.port }}
+            initialDelaySeconds: 50
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 15
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      
