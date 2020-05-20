@@ -110,10 +110,11 @@ dependencyManagement {
 
 sonarqube {
     properties {
-        property 'sonar.projectKey', 'semilla'
-        property 'sonar.host.url', 'http://localhost:9000'
-        property 'sonar.projectName', 'semilla'
+       property 'sonar.projectKey', 'seguros-ti-semilla'
+		property 'sonar.host.url', 'http://sonar.rfsc.cl:9000/sonarqube'
+		property 'sonar.projectName', 'seguros-ti-semilla'
 		property 'sonar.scm.disabled', 'true'
+		property 'sonar.login', 'ef27af73bbad6d1246ebe63a2eec0f48057c4a41'
     }
 }
 
