@@ -10,20 +10,12 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import static seguros.ti.gestionar.semilla.utils.Constants.SPRING_JPA_HIBERNATE_DDL_AUTO_KEY;
-import static seguros.ti.gestionar.semilla.utils.Constants.HIBERNATE_DDL_AUTO_KEY;
-import static seguros.ti.gestionar.semilla.utils.Constants.LIST_ENTITY_DATASOURCE_H2_DB;
-import static seguros.ti.gestionar.semilla.utils.Constants.PREFIX_H2_DATASOURCE;
-import static seguros.ti.gestionar.semilla.utils.Constants.HIBERNATE_DIALECT_KEY;
-import static seguros.ti.gestionar.semilla.utils.Constants.SPRING_JPA_HIBERNATE_DIALECT_H2_KEY;
-
 
 @Configuration
 @EnableTransactionManagement
@@ -35,7 +27,13 @@ import static seguros.ti.gestionar.semilla.utils.Constants.SPRING_JPA_HIBERNATE_
 public class H2DataSourceConfig {
 	
 	@Autowired
-    private Environment env;
+    private PropertiesJpa propertiesJpa;
+	
+	 protected static final String [] LIST_ENTITY_DATASOURCE_H2_DB= new String[] {
+	    		"seguros.ti.gestionar.semilla.dbh2.entities"
+	    		};
+	 protected static final String PREFIX_H2_DATASOURCE= "dbh2.datasource";	
+
 
 	@Primary
     @Bean(name = "h2dbDataSourceProperties")
@@ -72,8 +70,8 @@ public class H2DataSourceConfig {
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         
         Properties jpaProperties = new Properties();
-        jpaProperties.put(HIBERNATE_DDL_AUTO_KEY, env.getProperty(SPRING_JPA_HIBERNATE_DDL_AUTO_KEY));
-        jpaProperties.put(HIBERNATE_DIALECT_KEY, env.getProperty(SPRING_JPA_HIBERNATE_DIALECT_H2_KEY));
+        jpaProperties.put(propertiesJpa.getHIBERNATE_DDL_AUTO_KEY(),propertiesJpa.getSpring_jpa_hibernate_ddl_auto());
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         
         factory.setJpaProperties(jpaProperties);
 

@@ -76,7 +76,10 @@ public class PersonController {
 	public ResponseEntity<String> savePerson(@RequestBody PersonDto person) throws PersonException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 		try {
-			Person newPerson = new Person(person.getRut(), person.getFirstName(), person.getLastName());
+			Person newPerson = new Person();
+			newPerson.setRut(person.getRut());
+			newPerson.setFirstName(person.getFirstName());
+			newPerson.setLastName(person.getLastName());
 			personService.savePerson(newPerson);
 		}
 		catch(PersonException e) {
@@ -152,7 +155,10 @@ public class PersonController {
 	public ResponseEntity<String> updateClient(@PathVariable("id") Long id, @RequestBody PersonDto person) throws PersonException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 		try {
-			Person newPerson = new Person(person.getRut(), person.getFirstName(), person.getLastName());
+			Person newPerson = new Person();
+			newPerson.setRut(person.getRut());
+			newPerson.setFirstName(person.getFirstName());
+			newPerson.setLastName(person.getLastName());
 			newPerson.setId(id);
 			personService.updatePerson(newPerson);
 		}

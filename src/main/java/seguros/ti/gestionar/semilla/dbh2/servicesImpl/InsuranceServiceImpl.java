@@ -32,7 +32,6 @@ public class InsuranceServiceImpl implements InsuranceService{
 			insuranceRepository.save(insurance);	
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}

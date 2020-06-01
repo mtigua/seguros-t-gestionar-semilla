@@ -33,7 +33,6 @@ public class PersonServiceImpl implements PersonService{
 			return persons;
 			
 		}catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new PersonException();
 		}
@@ -58,7 +57,6 @@ public class PersonServiceImpl implements PersonService{
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new PersonException();
 		}
 	}
@@ -119,7 +117,6 @@ public class PersonServiceImpl implements PersonService{
 			return pagePersontDto; 
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new PersonException();
 		}

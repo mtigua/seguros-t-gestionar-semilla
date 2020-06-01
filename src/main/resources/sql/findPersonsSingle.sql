@@ -1,1 +1,1 @@
-SELECT new seguros.ti.gestionar.semilla.dto.PersonDto(c.id,c.rut,c.firstName,c.lastName) FROM Person c
+SELECT new seguros.ti.gestionar.semilla.dbsqlserver.dto.PersonDto(c.id,c.rut,c.firstName,c.lastName) FROM Person c

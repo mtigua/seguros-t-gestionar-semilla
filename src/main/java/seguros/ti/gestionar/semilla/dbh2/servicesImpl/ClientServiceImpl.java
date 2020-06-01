@@ -34,7 +34,6 @@ public class ClientServiceImpl implements ClientService{
 			return clients;
 			
 		}catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}
@@ -59,7 +58,6 @@ public class ClientServiceImpl implements ClientService{
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new ClientException();
 		}
 	}
@@ -73,7 +71,6 @@ public class ClientServiceImpl implements ClientService{
 			return client.isPresent()?client.get():null;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new ClientException();
 		}
 	}
@@ -133,7 +130,6 @@ public class ClientServiceImpl implements ClientService{
 			return pageClientDto; 
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}
@@ -147,7 +143,6 @@ public class ClientServiceImpl implements ClientService{
 			return client;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}

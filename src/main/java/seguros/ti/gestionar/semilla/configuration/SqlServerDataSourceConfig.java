@@ -1,11 +1,5 @@
 package seguros.ti.gestionar.semilla.configuration;
 
-import static seguros.ti.gestionar.semilla.utils.Constants.HIBERNATE_DDL_AUTO_KEY;
-import static seguros.ti.gestionar.semilla.utils.Constants.SPRING_JPA_HIBERNATE_DIALECT_SQLSERVER_KEY;
-import static seguros.ti.gestionar.semilla.utils.Constants.LIST_ENTITY_DATASOURCE_SQLSERVER_DB;
-import static seguros.ti.gestionar.semilla.utils.Constants.PREFIX_SQLSERVER_DATASOURCE;
-import static seguros.ti.gestionar.semilla.utils.Constants.SPRING_JPA_HIBERNATE_DDL_AUTO_KEY;
-import static seguros.ti.gestionar.semilla.utils.Constants.HIBERNATE_DIALECT_KEY;
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -15,7 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -34,8 +27,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 		)
 public class SqlServerDataSourceConfig {
 
-	@Autowired
-    private Environment env;
+	 protected static final String [] LIST_ENTITY_DATASOURCE_SQLSERVER_DB= new String[] {
+	    		"seguros.ti.gestionar.semilla.dbsqlserver.entities"
+	    		};
+	 protected static final String PREFIX_SQLSERVER_DATASOURCE= "dbsqlserver.datasource";	
+
+	 @Autowired
+	 private PropertiesJpa propertiesJpa;
+	
 
     @Bean(name = "sqlserverDataSourceProperties")
     @ConfigurationProperties(prefix = PREFIX_SQLSERVER_DATASOURCE)
@@ -69,8 +68,10 @@ public class SqlServerDataSourceConfig {
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
-        jpaProperties.put(HIBERNATE_DDL_AUTO_KEY, env.getProperty(SPRING_JPA_HIBERNATE_DDL_AUTO_KEY));
-        jpaProperties.put(HIBERNATE_DIALECT_KEY, env.getProperty(SPRING_JPA_HIBERNATE_DIALECT_SQLSERVER_KEY));
+        jpaProperties.put(propertiesJpa.getHIBERNATE_DDL_AUTO_KEY(), propertiesJpa.getSpring_jpa_hibernate_ddl_auto());
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");
+
+     //   jpaProperties.put(propertiesJpa.getHIBERNATE_DIALECT_KEY(), propertiesJpa.getSPRING_JPA_HIBERNATE_DIALECT_SQLSERVER_KEY());
 
         factory.setJpaProperties(jpaProperties);
 
