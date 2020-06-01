@@ -13,5 +13,7 @@ public class PropertiesSql {
 	private String find_clients_insurances_by_id_and_rate_filepath;
 	private String find_clients_single_filepath;
 	private String find_clients_insurances_by_insurance_id_filepath;
+	
+	private String find_persons_single_filepath;
 		 
 }

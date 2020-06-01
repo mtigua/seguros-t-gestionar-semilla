@@ -12,21 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import seguros.ti.gestionar.semilla.configuration.PropertiesMsg;
-import seguros.ti.gestionar.semilla.dto.ClientInsuranceDto;
-import seguros.ti.gestionar.semilla.dto.InsuranceDto;
-import seguros.ti.gestionar.semilla.entities.Client;
-import seguros.ti.gestionar.semilla.entities.Insurance;
+import seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto;
+import seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto;
+import seguros.ti.gestionar.semilla.dbh2.entities.Client;
+import seguros.ti.gestionar.semilla.dbh2.entities.Insurance;
+import seguros.ti.gestionar.semilla.dbh2.servicesImpl.ClientException;
+import seguros.ti.gestionar.semilla.dbh2.services.ClientService;
+import seguros.ti.gestionar.semilla.dbh2.services.InsuranceService;
 import seguros.ti.gestionar.semilla.exceptions.ExceptionResponse;
 import seguros.ti.gestionar.semilla.exceptions.ResourceNotFoundException;
-import seguros.ti.gestionar.semilla.services.ClientService;
-import seguros.ti.gestionar.semilla.services.InsuranceService;
-import seguros.ti.gestionar.semilla.servicesImpl.ClientException;
 import seguros.ti.gestionar.semilla.utils.Utils;
 
 @RestController
@@ -120,7 +119,7 @@ public class InsuranceController {
 	
 	@ApiOperation(value = SWAGGER_GET_DESC, notes = SWAGGER_GET_DESC)
 	@ApiResponses({ 
-		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dto.InsuranceDto.class),
+		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto.class),
 		@ApiResponse(code = 400, message = MSG_HTTP400, response = ExceptionResponse.class),
 		@ApiResponse(code = 401, message = MSG_HTTP401, response = ExceptionResponse.class),
 		@ApiResponse(code = 403, message = MSG_HTTP403, response = ExceptionResponse.class),
@@ -128,9 +127,9 @@ public class InsuranceController {
 		@ApiResponse(code = 500, message = MSG_HTTP500, response = ExceptionResponse.class) 
 		})
 	@RequestMapping(value="/{id}/simple", method=RequestMethod.GET)	
-	public ResponseEntity<seguros.ti.gestionar.semilla.dto.InsuranceDto> getInsurance(@PathVariable("id") Long id) throws ClientException, ResourceNotFoundException{	
+	public ResponseEntity<seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto> getInsurance(@PathVariable("id") Long id) throws ClientException, ResourceNotFoundException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
-		seguros.ti.gestionar.semilla.dto.InsuranceDto insurance = null;
+		seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto insurance = null;
 		try {
 			insurance = insuranceService.getInsurance(id);
 			if(insurance == null) {
@@ -143,6 +142,6 @@ public class InsuranceController {
 			throw e;
 		}		
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
-		return new ResponseEntity<seguros.ti.gestionar.semilla.dto.InsuranceDto>(insurance, HttpStatus.OK);
+		return new ResponseEntity<seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto>(insurance, HttpStatus.OK);
 	}
 }

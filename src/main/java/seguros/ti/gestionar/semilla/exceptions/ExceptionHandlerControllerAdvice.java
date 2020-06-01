@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.google.gson.JsonObject;
 
-import seguros.ti.gestionar.semilla.servicesImpl.ClientException;
+import seguros.ti.gestionar.semilla.dbh2.servicesImpl.ClientException;
 
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {

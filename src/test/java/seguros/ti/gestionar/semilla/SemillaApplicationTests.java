@@ -11,11 +11,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import seguros.ti.gestionar.semilla.dto.ClientDto;
-import seguros.ti.gestionar.semilla.entities.Client;
-import seguros.ti.gestionar.semilla.repositories.ClientRepository;
-import seguros.ti.gestionar.semilla.servicesImpl.ClientException;
-import seguros.ti.gestionar.semilla.servicesImpl.ClientServiceImpl;
+import seguros.ti.gestionar.semilla.dbh2.dto.ClientDto;
+import seguros.ti.gestionar.semilla.dbh2.entities.Client;
+import seguros.ti.gestionar.semilla.dbh2.repositories.ClientRepository;
+import seguros.ti.gestionar.semilla.dbh2.servicesImpl.ClientException;
+import seguros.ti.gestionar.semilla.dbh2.servicesImpl.ClientServiceImpl;
+
 import static org.mockito.Mockito.when;
 
 
