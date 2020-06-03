@@ -24,13 +24,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import seguros.ti.gestionar.semilla.configuration.KafkaProducer;
 import seguros.ti.gestionar.semilla.configuration.PropertiesMsg;
-import seguros.ti.gestionar.semilla.dbh2.dto.ClientDto;
-import seguros.ti.gestionar.semilla.dbh2.dto.KafkaMsgDto;
 import seguros.ti.gestionar.semilla.dbh2.entities.Client;
-import seguros.ti.gestionar.semilla.dbh2.services.ClientService;
-import seguros.ti.gestionar.semilla.dbh2.servicesImpl.ClientException;
+import seguros.ti.gestionar.semilla.dto.ClientDto;
+import seguros.ti.gestionar.semilla.dto.KafkaMsgDto;
 import seguros.ti.gestionar.semilla.exceptions.ExceptionResponse;
 import seguros.ti.gestionar.semilla.exceptions.ResourceNotFoundException;
+import seguros.ti.gestionar.semilla.services.ClientService;
+import seguros.ti.gestionar.semilla.servicesImpl.ClientException;
 import seguros.ti.gestionar.semilla.utils.Utils;
 
 @RestController
@@ -117,7 +117,7 @@ public class ClientController {
 	
 	@ApiOperation(value = SWAGGER_GET_ALL_DESC, notes = SWAGGER_GET_ALL_DESC)
 	@ApiResponses({ 
-		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dbh2.dto.ClientDto[].class),
+		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dto.ClientDto[].class),
 		@ApiResponse(code = 400, message = MSG_HTTP400, response = ExceptionResponse.class),
 		@ApiResponse(code = 401, message = MSG_HTTP401, response = ExceptionResponse.class),
 		@ApiResponse(code = 403, message = MSG_HTTP403, response = ExceptionResponse.class),
@@ -125,9 +125,9 @@ public class ClientController {
 		@ApiResponse(code = 500, message = MSG_HTTP500, response = ExceptionResponse.class) 
 		})
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public ResponseEntity<List<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto>> getClients() throws ClientException{	
+	public ResponseEntity<List<seguros.ti.gestionar.semilla.dto.ClientDto>> getClients() throws ClientException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
-		List<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> clients = null;
+		List<seguros.ti.gestionar.semilla.dto.ClientDto> clients = null;
 		try {
 			clients = clientService.getClients();
 		}
@@ -136,12 +136,12 @@ public class ClientController {
 			throw e;
 		}		
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
-		return new ResponseEntity<List<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto>>(clients, HttpStatus.OK);
+		return new ResponseEntity<List<seguros.ti.gestionar.semilla.dto.ClientDto>>(clients, HttpStatus.OK);
 	}	
 	
 	@ApiOperation(value = SWAGGER_GET_DESC, notes = SWAGGER_GET_DESC)
 	@ApiResponses({ 
-		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dbh2.dto.ClientDto.class),
+		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dto.ClientDto.class),
 		@ApiResponse(code = 400, message = MSG_HTTP400, response = ExceptionResponse.class),
 		@ApiResponse(code = 401, message = MSG_HTTP401, response = ExceptionResponse.class),
 		@ApiResponse(code = 403, message = MSG_HTTP403, response = ExceptionResponse.class),
@@ -149,9 +149,9 @@ public class ClientController {
 		@ApiResponse(code = 500, message = MSG_HTTP500, response = ExceptionResponse.class) 
 		})
 	@RequestMapping(value="/{id}/simple", method=RequestMethod.GET)	
-	public ResponseEntity<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> getClient(@PathVariable("id") Long id) throws ClientException, ResourceNotFoundException{	
+	public ResponseEntity<seguros.ti.gestionar.semilla.dto.ClientDto> getClient(@PathVariable("id") Long id) throws ClientException, ResourceNotFoundException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
-		seguros.ti.gestionar.semilla.dbh2.dto.ClientDto client = null;
+		seguros.ti.gestionar.semilla.dto.ClientDto client = null;
 		try {
 			client = clientService.getClient(id);
 			if(client == null) {
@@ -164,7 +164,7 @@ public class ClientController {
 			throw e;
 		}		
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
-		return new ResponseEntity<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto>(client, HttpStatus.OK);
+		return new ResponseEntity<seguros.ti.gestionar.semilla.dto.ClientDto>(client, HttpStatus.OK);
 	}
 	
 	
@@ -226,10 +226,10 @@ public class ClientController {
 		@ApiResponse(code = 500, message = MSG_HTTP500, response = ExceptionResponse.class) 
 	})
 	@RequestMapping(value="/paging", method=RequestMethod.GET)
-	public ResponseEntity<Page<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto>> getClientsPaging(@RequestParam("page") int pageIndex,@RequestParam(value ="size",required = false,defaultValue = PAGE_DEFAULT_SIZE) int pageSize) throws ClientException{
+	public ResponseEntity<Page<seguros.ti.gestionar.semilla.dto.ClientDto>> getClientsPaging(@RequestParam("page") int pageIndex,@RequestParam(value ="size",required = false,defaultValue = PAGE_DEFAULT_SIZE) int pageSize) throws ClientException{
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 		Pageable pageable = null; 
-		Page<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> page = null;
+		Page<seguros.ti.gestionar.semilla.dto.ClientDto> page = null;
 		try {
 			pageable = PageRequest.of(pageIndex, pageSize);
 		    page = clientService.getClientList(pageable);
@@ -239,13 +239,13 @@ public class ClientController {
 			throw e;
 		}
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
-		return new ResponseEntity<Page<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto>>(page, HttpStatus.OK);
+		return new ResponseEntity<Page<seguros.ti.gestionar.semilla.dto.ClientDto>>(page, HttpStatus.OK);
 	} 
 	
 
 	@ApiOperation(value = SWAGGER_GET_DESC_BY_ID_RATE, notes = SWAGGER_GET_DESC_BY_ID_RATE)
 	@ApiResponses({ 
-		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto[].class),
+		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dto.ClientInsuranceDto[].class),
 		@ApiResponse(code = 400, message = MSG_HTTP400, response = ExceptionResponse.class),
 		@ApiResponse(code = 401, message = MSG_HTTP401, response = ExceptionResponse.class),
 		@ApiResponse(code = 403, message = MSG_HTTP403, response = ExceptionResponse.class),
@@ -253,9 +253,9 @@ public class ClientController {
 		@ApiResponse(code = 500, message = MSG_HTTP500, response = ExceptionResponse.class) 
 	})
 	@RequestMapping(value="/{id}/tarifas", method=RequestMethod.GET)	
-	public ResponseEntity<List<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto>> getClientByRate(@PathVariable("id") Long id,@RequestParam("minimumRate") Double minimumRate) throws ClientException, ResourceNotFoundException{	
+	public ResponseEntity<List<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto>> getClientByRate(@PathVariable("id") Long id,@RequestParam("minimumRate") Double minimumRate) throws ClientException, ResourceNotFoundException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
-		List<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto> clients = null;
+		List<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto> clients = null;
 		try {
 			clients = clientService.getClientByIdAndRate(id,minimumRate);
 			if(clients == null) {
@@ -268,7 +268,7 @@ public class ClientController {
 			throw e;
 		}		
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
-		return new ResponseEntity<List<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto>>(clients, HttpStatus.OK);
+		return new ResponseEntity<List<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto>>(clients, HttpStatus.OK);
 	}
 
 	

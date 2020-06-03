@@ -1,4 +1,4 @@
-package seguros.ti.gestionar.semilla.dbh2.dto;
+package seguros.ti.gestionar.semilla.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package seguros.ti.gestionar.semilla.dbh2.servicesImpl;
+package seguros.ti.gestionar.semilla.servicesImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,10 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import seguros.ti.gestionar.semilla.dbh2.dto.ClientDto;
 import seguros.ti.gestionar.semilla.dbh2.entities.Client;
 import seguros.ti.gestionar.semilla.dbh2.repositories.ClientRepository;
-import seguros.ti.gestionar.semilla.dbh2.services.ClientService;
+import seguros.ti.gestionar.semilla.dto.ClientDto;
+import seguros.ti.gestionar.semilla.services.ClientService;
 
 import org.springframework.transaction.annotation.Transactional;
 import java.util.function.Function;
@@ -27,10 +27,10 @@ public class ClientServiceImpl implements ClientService{
 	
 	@Override
 	@Transactional
-	public List<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> getClients() throws ClientException{
+	public List<seguros.ti.gestionar.semilla.dto.ClientDto> getClients() throws ClientException{
 		try {
 			//List<Client> clients = clientRepository.findAll();
-			List<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> clients = clientRepository.findAllSingleDto();
+			List<seguros.ti.gestionar.semilla.dto.ClientDto> clients = clientRepository.findAllSingleDto();
 			return clients;
 			
 		}catch(Exception e) {
@@ -41,14 +41,14 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	@Transactional
-	public seguros.ti.gestionar.semilla.dbh2.dto.ClientDto getClient(Long id) throws ClientException {
+	public seguros.ti.gestionar.semilla.dto.ClientDto getClient(Long id) throws ClientException {
 		try {			
 			Optional<Client> client = clientRepository.findById(id);
 			if(!client.isPresent()){
 				return null;
 			}
 			else{
-				seguros.ti.gestionar.semilla.dbh2.dto.ClientDto clientDto = new seguros.ti.gestionar.semilla.dbh2.dto.ClientDto();
+				seguros.ti.gestionar.semilla.dto.ClientDto clientDto = new seguros.ti.gestionar.semilla.dto.ClientDto();
 				Client clientObj = client.get();
 				clientDto.setId(clientObj.getId());
 				clientDto.setRut(clientObj.getRut());
@@ -137,9 +137,9 @@ public class ClientServiceImpl implements ClientService{
 	
 	@Override
 	@Transactional
-	public List<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto> getClientByIdAndRate(Long id, Double rate) throws ClientException {
+	public List<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto> getClientByIdAndRate(Long id, Double rate) throws ClientException {
 		try {			
-			List<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto> client = clientRepository.findByIdAndRate(id, rate);
+			List<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto> client = clientRepository.findByIdAndRate(id, rate);
 			return client;
 		}
 		catch(Exception e) {

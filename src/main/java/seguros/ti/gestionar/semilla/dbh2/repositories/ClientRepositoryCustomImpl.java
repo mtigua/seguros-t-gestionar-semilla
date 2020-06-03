@@ -37,13 +37,13 @@ public class ClientRepositoryCustomImpl implements ClientRepositoryCustom{
     private PropertiesSql propertiesSql;
 
 	@Override
-	public List<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto> findByIdAndRate(Long id, Double rate) {
+	public List<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto> findByIdAndRate(Long id, Double rate) {
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 		String sqlQuery = SqlReader.readSql(propertiesSql.getFind_clients_insurances_by_id_and_rate_filepath());	
-		TypedQuery<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto> typedQuery = entityManager.createQuery(sqlQuery, seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto.class);
+		TypedQuery<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto> typedQuery = entityManager.createQuery(sqlQuery, seguros.ti.gestionar.semilla.dto.ClientInsuranceDto.class);
 		typedQuery.setParameter("id",id);
 		typedQuery.setParameter("rate",rate);
-		List<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto> clientsInsurancesDtos = typedQuery.getResultList();
+		List<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto> clientsInsurancesDtos = typedQuery.getResultList();
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
 		return clientsInsurancesDtos;
 	}
@@ -59,11 +59,11 @@ public class ClientRepositoryCustomImpl implements ClientRepositoryCustom{
 	}
 	
 	@Override
-	public List<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> findAllSingleDto() {
+	public List<seguros.ti.gestionar.semilla.dto.ClientDto> findAllSingleDto() {
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 		String sqlQuery = SqlReader.readSql(propertiesSql.getFind_clients_single_filepath());
-		TypedQuery<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> typedQuery = entityManager.createQuery(sqlQuery, seguros.ti.gestionar.semilla.dbh2.dto.ClientDto.class);
-		List<seguros.ti.gestionar.semilla.dbh2.dto.ClientDto> clientsDto = typedQuery.getResultList();
+		TypedQuery<seguros.ti.gestionar.semilla.dto.ClientDto> typedQuery = entityManager.createQuery(sqlQuery, seguros.ti.gestionar.semilla.dto.ClientDto.class);
+		List<seguros.ti.gestionar.semilla.dto.ClientDto> clientsDto = typedQuery.getResultList();
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));
 		return clientsDto;
 	}

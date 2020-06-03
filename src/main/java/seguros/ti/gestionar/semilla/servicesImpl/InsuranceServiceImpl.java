@@ -1,4 +1,4 @@
-package seguros.ti.gestionar.semilla.dbh2.servicesImpl;
+package seguros.ti.gestionar.semilla.servicesImpl;
 
 import java.util.Optional;
 
@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto;
 import seguros.ti.gestionar.semilla.dbh2.entities.Client;
 import seguros.ti.gestionar.semilla.dbh2.entities.Insurance;
 import seguros.ti.gestionar.semilla.dbh2.repositories.InsuranceRepository;
-import seguros.ti.gestionar.semilla.dbh2.services.InsuranceService;
+import seguros.ti.gestionar.semilla.dto.ClientInsuranceDto;
+import seguros.ti.gestionar.semilla.services.InsuranceService;
 
 @Service
 public class InsuranceServiceImpl implements InsuranceService{
@@ -38,14 +38,14 @@ public class InsuranceServiceImpl implements InsuranceService{
 	}
 	
 	@Override
-	public seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto getInsurance(Long insuranceId) throws ClientException {
+	public seguros.ti.gestionar.semilla.dto.InsuranceDto getInsurance(Long insuranceId) throws ClientException {
 		try {
 			
 			Optional<Insurance> insurance = insuranceRepository.findById(insuranceId);
 			if(!insurance.isPresent()) {
 				return null;
 			}
-			seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto result = new seguros.ti.gestionar.semilla.dbh2.dto.InsuranceDto();
+			seguros.ti.gestionar.semilla.dto.InsuranceDto result = new seguros.ti.gestionar.semilla.dto.InsuranceDto();
 			Insurance insuranceObj = insurance.get();
 			result.setId(insuranceObj.getId());
 			result.setName(insuranceObj.getName());

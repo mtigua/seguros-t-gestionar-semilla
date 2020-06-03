@@ -1,4 +1,4 @@
-package seguros.ti.gestionar.semilla.dbsqlserver.servicesImpl;
+package seguros.ti.gestionar.semilla.servicesImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,10 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import seguros.ti.gestionar.semilla.dbsqlserver.dto.PersonDto;
 import seguros.ti.gestionar.semilla.dbsqlserver.entities.Person;
 import seguros.ti.gestionar.semilla.dbsqlserver.repositories.PersonRepository;
-import seguros.ti.gestionar.semilla.dbsqlserver.services.PersonService;
+import seguros.ti.gestionar.semilla.dto.PersonDto;
+import seguros.ti.gestionar.semilla.services.PersonService;
 
 import org.springframework.transaction.annotation.Transactional;
 import java.util.function.Function;

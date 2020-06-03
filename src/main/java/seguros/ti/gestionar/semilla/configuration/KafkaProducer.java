@@ -8,7 +8,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
-import seguros.ti.gestionar.semilla.dbh2.dto.KafkaMsgDto;
+import seguros.ti.gestionar.semilla.dto.KafkaMsgDto;
 
 
 public class KafkaProducer {	

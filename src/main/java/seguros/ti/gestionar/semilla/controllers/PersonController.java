@@ -23,16 +23,16 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import seguros.ti.gestionar.semilla.configuration.PropertiesMsg;
-import seguros.ti.gestionar.semilla.dbsqlserver.dto.PersonDto;
 import seguros.ti.gestionar.semilla.dbsqlserver.entities.Person;
-import seguros.ti.gestionar.semilla.dbsqlserver.services.PersonService;
-import seguros.ti.gestionar.semilla.dbsqlserver.servicesImpl.PersonException;
+import seguros.ti.gestionar.semilla.dto.PersonDto;
 import seguros.ti.gestionar.semilla.exceptions.ExceptionResponse;
 import seguros.ti.gestionar.semilla.exceptions.ResourceNotFoundException;
+import seguros.ti.gestionar.semilla.services.PersonService;
+import seguros.ti.gestionar.semilla.servicesImpl.PersonException;
 import seguros.ti.gestionar.semilla.utils.Utils;
 
 @RestController
-@Api(value="Client Resource")
+@Api(value="Person Resource")
 @RequestMapping("/persons")
 @RefreshScope
 @CrossOrigin(origins = "${domains.origin.allowed.semilla}", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PATCH,RequestMethod.DELETE,RequestMethod.OPTIONS})
@@ -46,12 +46,12 @@ public class PersonController {
 	private static final String MSG_HTTP403 = "No autorizado";
 	private static final String MSG_HTTP404 = "No se encuentra el recurso solicitado";
 	private static final String MSG_HTTP500 = "Error interno del sistema";
-	private static final String SWAGGER_POST_DESC = "Registro de un nuevo cliente";
-	private static final String SWAGGER_GET_ALL_DESC = "Obtener listado de clientes";
-	private static final String SWAGGER_GET_DESC = "Obtener detalle de un cliente";
-	private static final String SWAGGER_GET_DESC_PAG = "Obtener listado de clientes paginado";
-	private static final String SWAGGER_PUT_DESC = "Actualizar cliente";
-	private static final String SWAGGER_DELETE_DESC = "Eliminar cliente";
+	private static final String SWAGGER_POST_DESC = "Registro de un nueva persona";
+	private static final String SWAGGER_GET_ALL_DESC = "Obtener listado de personas";
+	private static final String SWAGGER_GET_DESC = "Obtener detalle de un personas";
+	private static final String SWAGGER_GET_DESC_PAG = "Obtener listado de personas paginado";
+	private static final String SWAGGER_PUT_DESC = "Actualizar persona";
+	private static final String SWAGGER_DELETE_DESC = "Eliminar persona";
 	private static final String PAGE_DEFAULT_SIZE = "7";
 	
 	@Autowired
@@ -91,7 +91,7 @@ public class PersonController {
 	
 	@ApiOperation(value = SWAGGER_GET_ALL_DESC, notes = SWAGGER_GET_ALL_DESC)
 	@ApiResponses({ 
-		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dbh2.dto.ClientDto[].class),
+		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dto.PersonDto[].class),
 		@ApiResponse(code = 400, message = MSG_HTTP400, response = ExceptionResponse.class),
 		@ApiResponse(code = 401, message = MSG_HTTP401, response = ExceptionResponse.class),
 		@ApiResponse(code = 403, message = MSG_HTTP403, response = ExceptionResponse.class),
@@ -99,7 +99,7 @@ public class PersonController {
 		@ApiResponse(code = 500, message = MSG_HTTP500, response = ExceptionResponse.class) 
 		})
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public ResponseEntity<List<PersonDto>> getClients() throws PersonException{	
+	public ResponseEntity<List<PersonDto>> getPersons() throws PersonException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 		List<PersonDto> persons = null;
 		try {
@@ -115,7 +115,7 @@ public class PersonController {
 	
 	@ApiOperation(value = SWAGGER_GET_DESC, notes = SWAGGER_GET_DESC)
 	@ApiResponses({ 
-		@ApiResponse(code = 200, message = MSG_HTTP200, response = seguros.ti.gestionar.semilla.dbh2.dto.ClientDto.class),
+		@ApiResponse(code = 200, message = MSG_HTTP200, response = PersonDto.class),
 		@ApiResponse(code = 400, message = MSG_HTTP400, response = ExceptionResponse.class),
 		@ApiResponse(code = 401, message = MSG_HTTP401, response = ExceptionResponse.class),
 		@ApiResponse(code = 403, message = MSG_HTTP403, response = ExceptionResponse.class),
@@ -152,7 +152,7 @@ public class PersonController {
 		@ApiResponse(code = 500, message = MSG_HTTP500, response = ExceptionResponse.class) 
 		})
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<String> updateClient(@PathVariable("id") Long id, @RequestBody PersonDto person) throws PersonException{	
+	public ResponseEntity<String> updatePerson(@PathVariable("id") Long id, @RequestBody PersonDto person) throws PersonException{	
 		logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 		try {
 			Person newPerson = new Person();

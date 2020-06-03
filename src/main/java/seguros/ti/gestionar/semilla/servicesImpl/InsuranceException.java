@@ -1,11 +1,11 @@
-package seguros.ti.gestionar.semilla.dbh2.servicesImpl;
+package seguros.ti.gestionar.semilla.servicesImpl;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ClientException extends Exception{
+public class InsuranceException extends Exception{
 
 	private static final long serialVersionUID = 1L;
 	

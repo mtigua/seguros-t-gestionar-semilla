@@ -46,12 +46,12 @@ public class InsuranceRepositoryCustomImpl implements InsuranceRepositoryCustom{
 	}	 
 	
 	@Override
-	public seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto findByInsuranceId (Long id)  { 
-		seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto clientInsurancesDto = null;
+	public seguros.ti.gestionar.semilla.dto.ClientInsuranceDto findByInsuranceId (Long id)  { 
+		seguros.ti.gestionar.semilla.dto.ClientInsuranceDto clientInsurancesDto = null;
 		try {
 			logger.info(Utils.encodeString(propertiesMsg.getLogger_info_iniciando()));
 			String sqlQuery = SqlReader.readSql(propertiesSql.getFind_clients_insurances_by_insurance_id_filepath());	
-			TypedQuery<seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto> typedQuery = entityManager.createQuery(sqlQuery, seguros.ti.gestionar.semilla.dbh2.dto.ClientInsuranceDto.class);
+			TypedQuery<seguros.ti.gestionar.semilla.dto.ClientInsuranceDto> typedQuery = entityManager.createQuery(sqlQuery, seguros.ti.gestionar.semilla.dto.ClientInsuranceDto.class);
 			typedQuery.setParameter("id",id);
 			clientInsurancesDto = typedQuery.getSingleResult();
 			logger.info(Utils.encodeString(propertiesMsg.getLogger_info_finalizando()));

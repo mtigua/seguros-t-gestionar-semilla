@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import seguros.ti.gestionar.semilla.configuration.PropertiesMsg;
 import seguros.ti.gestionar.semilla.configuration.PropertiesSql;
-import seguros.ti.gestionar.semilla.dbsqlserver.dto.PersonDto;
+import seguros.ti.gestionar.semilla.dto.PersonDto;
 import seguros.ti.gestionar.semilla.utils.SqlReader;
 import seguros.ti.gestionar.semilla.utils.Utils;
 

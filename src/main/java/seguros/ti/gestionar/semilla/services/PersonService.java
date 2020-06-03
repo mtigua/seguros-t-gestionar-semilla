@@ -1,12 +1,12 @@
-package seguros.ti.gestionar.semilla.dbsqlserver.services;
+package seguros.ti.gestionar.semilla.services;
 
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import seguros.ti.gestionar.semilla.dbsqlserver.dto.PersonDto;
 import seguros.ti.gestionar.semilla.dbsqlserver.entities.Person;
-import seguros.ti.gestionar.semilla.dbsqlserver.servicesImpl.PersonException;
+import seguros.ti.gestionar.semilla.dto.PersonDto;
+import seguros.ti.gestionar.semilla.servicesImpl.PersonException;
 
 public interface PersonService {
 

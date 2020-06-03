@@ -2,7 +2,7 @@ package seguros.ti.gestionar.semilla.dbsqlserver.repositories;
 
 import java.util.List;
 
-import seguros.ti.gestionar.semilla.dbsqlserver.dto.PersonDto;
+import seguros.ti.gestionar.semilla.dto.PersonDto;
 
 public interface PersonRepositoryCustom {
 	

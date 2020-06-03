@@ -28,8 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SqlServerDataSourceConfig {
 
 	 protected static final String [] LIST_ENTITY_DATASOURCE_SQLSERVER_DB= new String[] {
-	    		"seguros.ti.gestionar.semilla.dbsqlserver.entities"
-	    		};
+	    		"seguros.ti.gestionar.semilla.dbsqlserver.entities"};
 	 protected static final String PREFIX_SQLSERVER_DATASOURCE= "dbsqlserver.datasource";	
 
 	 @Autowired

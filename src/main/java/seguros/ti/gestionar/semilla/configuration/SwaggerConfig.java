@@ -16,13 +16,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport{
        
-//	   @Value("${SWAGGER_BASEPATH}")
-//	   private String basePath;
+	   @Value("${SWAGGER_BASEPATH}")
+	   private String basePath;
 	
 		@Bean
 		public Docket apiDocket() {
 		    return new Docket(DocumentationType.SWAGGER_2)
-		    		//.host(basePath)
+		    		.host(basePath)
 		            .select()
 		            .apis(RequestHandlerSelectors.basePackage("seguros.ti."))
 		            .paths(PathSelectors.any())
