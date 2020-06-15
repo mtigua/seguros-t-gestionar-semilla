@@ -1,7 +1,7 @@
 package seguros.ti.gestionar.semilla.services;
 
-import seguros.ti.gestionar.semilla.entities.Client;
-import seguros.ti.gestionar.semilla.entities.Insurance;
+import seguros.ti.gestionar.semilla.dbh2.entities.Client;
+import seguros.ti.gestionar.semilla.dbh2.entities.Insurance;
 import seguros.ti.gestionar.semilla.servicesImpl.ClientException;
 
 public interface InsuranceService {

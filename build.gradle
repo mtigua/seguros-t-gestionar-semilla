@@ -65,31 +65,21 @@ dependencies {
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtime("com.h2database:h2:1.4.196")
-	
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'	
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	compile "org.springframework.kafka:spring-kafka:2.2.7.RELEASE"
-
-	
+	compile "org.springframework.kafka:spring-kafka:2.2.7.RELEASE"	
 	compile group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
 	compile group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
-	
-
 	compile group: 'com.github.danielwegener', name: 'logback-kafka-appender', version: '0.2.0-RC1'
 	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
-	
-	
 	compileOnly 'org.projectlombok:lombok:1.18.4'
-    annotationProcessor 'org.projectlombok:lombok:1.18.4'
-	
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'	
 	compile 'net.logstash.logback:logstash-logback-encoder:4.11'
 	compile ('com.microsoft.sqlserver:mssql-jdbc')
 	compile "org.json:json:20180813"
-	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'
-	
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'	
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compile ("org.springframework.boot:spring-boot-starter-jdbc")
 	//Add Swagger2 dependencies
@@ -98,8 +88,12 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile 'io.jsonwebtoken:jjwt:0.7.0'
-
 	runtime group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-kafka', version: '2.2.0.RELEASE'
+    
+    //Multiple DataSource
+    runtime("com.h2database:h2:1.4.196")
+    compile ('com.microsoft.sqlserver:mssql-jdbc')
+    
 }
 
 dependencyManagement {

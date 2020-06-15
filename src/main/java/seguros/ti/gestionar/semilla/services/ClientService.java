@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import seguros.ti.gestionar.semilla.entities.Client;
+import seguros.ti.gestionar.semilla.dbh2.entities.Client;
 import seguros.ti.gestionar.semilla.servicesImpl.ClientException;
 
 public interface ClientService {

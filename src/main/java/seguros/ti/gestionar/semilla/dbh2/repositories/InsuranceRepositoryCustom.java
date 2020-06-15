@@ -1,6 +1,6 @@
-package seguros.ti.gestionar.semilla.repositories;
+package seguros.ti.gestionar.semilla.dbh2.repositories;
 
-import seguros.ti.gestionar.semilla.entities.Insurance;
+import seguros.ti.gestionar.semilla.dbh2.entities.Insurance;
 
 public interface InsuranceRepositoryCustom {
 	

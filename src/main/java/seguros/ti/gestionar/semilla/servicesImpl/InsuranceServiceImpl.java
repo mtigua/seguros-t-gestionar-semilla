@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import seguros.ti.gestionar.semilla.dbh2.entities.Client;
+import seguros.ti.gestionar.semilla.dbh2.entities.Insurance;
+import seguros.ti.gestionar.semilla.dbh2.repositories.InsuranceRepository;
 import seguros.ti.gestionar.semilla.dto.ClientInsuranceDto;
-import seguros.ti.gestionar.semilla.entities.Client;
-import seguros.ti.gestionar.semilla.entities.Insurance;
-import seguros.ti.gestionar.semilla.repositories.InsuranceRepository;
 import seguros.ti.gestionar.semilla.services.InsuranceService;
 
 @Service
@@ -32,7 +32,6 @@ public class InsuranceServiceImpl implements InsuranceService{
 			insuranceRepository.save(insurance);	
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}

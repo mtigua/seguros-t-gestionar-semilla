@@ -1,4 +1,4 @@
-package seguros.ti.gestionar.semilla.entities;
+package seguros.ti.gestionar.semilla.dbh2.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

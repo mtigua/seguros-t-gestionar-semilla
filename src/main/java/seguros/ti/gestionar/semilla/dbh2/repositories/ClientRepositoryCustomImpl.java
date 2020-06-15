@@ -1,4 +1,4 @@
-package seguros.ti.gestionar.semilla.repositories;
+package seguros.ti.gestionar.semilla.dbh2.repositories;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,11 +12,12 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import seguros.ti.gestionar.semilla.configuration.PropertiesMsg;
 import seguros.ti.gestionar.semilla.configuration.PropertiesSql;
-import seguros.ti.gestionar.semilla.entities.Client;
+import seguros.ti.gestionar.semilla.dbh2.entities.Client;
 import seguros.ti.gestionar.semilla.utils.SqlReader;
 import seguros.ti.gestionar.semilla.utils.Utils;
 
@@ -26,6 +27,7 @@ public class ClientRepositoryCustomImpl implements ClientRepositoryCustom{
 	private static final Logger logger = LoggerFactory.getLogger(ClientRepositoryCustomImpl.class.getSimpleName());
 
 	@Autowired
+	@Qualifier("h2dbEntityManagerFactory")
 	private  EntityManager entityManager;
 	
 	@Autowired

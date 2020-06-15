@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import seguros.ti.gestionar.semilla.dto.ClientDto; 
+
+import seguros.ti.gestionar.semilla.dbh2.entities.Client;
+import seguros.ti.gestionar.semilla.dbh2.repositories.ClientRepository;
+import seguros.ti.gestionar.semilla.dto.ClientDto;
+import seguros.ti.gestionar.semilla.services.ClientService;
+
 import org.springframework.transaction.annotation.Transactional;
 import java.util.function.Function;
-
-import seguros.ti.gestionar.semilla.entities.Client;
-import seguros.ti.gestionar.semilla.repositories.ClientRepository;
-import seguros.ti.gestionar.semilla.services.ClientService;
 
 @Service
 public class ClientServiceImpl implements ClientService{
@@ -33,7 +34,6 @@ public class ClientServiceImpl implements ClientService{
 			return clients;
 			
 		}catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}
@@ -58,7 +58,6 @@ public class ClientServiceImpl implements ClientService{
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new ClientException();
 		}
 	}
@@ -72,7 +71,6 @@ public class ClientServiceImpl implements ClientService{
 			return client.isPresent()?client.get():null;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			throw new ClientException();
 		}
 	}
@@ -132,7 +130,6 @@ public class ClientServiceImpl implements ClientService{
 			return pageClientDto; 
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}
@@ -146,7 +143,6 @@ public class ClientServiceImpl implements ClientService{
 			return client;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw new ClientException();
 		}
